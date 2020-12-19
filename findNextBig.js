@@ -25,9 +25,10 @@ const findNext = (numer) => {
       min = j;
     }
   }
-  swap(digitArray, i-1, min);
-  let splitArray = digitArray.splice(i,n);
-  return [...digitArray, ...splitArray.sort((a, b) => a - b)].join('');
+  swap(digitArray, i - 1, min);
+  let splitArray = digitArray.splice(i, n);
+  let result = [...digitArray, ...splitArray.sort((a, b) => a - b)].join("");
+  return result > numer && result <= 2**31-1 ? result : -1;
 };
 
-console.log(findNext(218765));
+console.log(findNext(101));
