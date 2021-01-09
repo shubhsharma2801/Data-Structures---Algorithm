@@ -50,7 +50,7 @@ class Middle {
   }
 
   print() {
-      console.log('***********print***********');
+      console.log('***********print***********')
     let temp = this.head;
     while (temp) {
       console.log(temp.val);
