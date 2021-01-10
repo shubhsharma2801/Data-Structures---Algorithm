@@ -30,7 +30,6 @@ var minWindow = function(s, t) {
     }
     const s1 = [...s];
     const t1 = [...t];
-    
     let frequencyMap = new Map();
     for(let i =0; i<t1.length;i++){
         setOrDefault(frequencyMap,t1[i]);
@@ -49,13 +48,11 @@ var minWindow = function(s, t) {
             matchCount = windowMap.get(s1[right]) <= getOrDefault(frequencyMap,s1[right]) ? ++matchCount :matchCount;
             right++;
         }else{
-            let tempAns = s1.slice(left,right);
             if(!ans){
-                ans = tempAns;
+                ans = {left:left,right:right};
             }else{
-                ans = tempAns.length < ans.length ? tempAns :ans;   
+                ans = right - left < ans.right - ans.left ? {left:left,right:right} :ans;   
             }
-            //console.log(tempAns);
             decrementOrDeleteFromMap(windowMap,s1[left]);
             if(windowMap.has(s1[left])){
              matchCount = windowMap.get(s1[left]) <frequencyMap.get(s1[left]) ? --matchCount :matchCount;   
@@ -68,5 +65,5 @@ var minWindow = function(s, t) {
         }
         
     }
-    return ans ?ans.join(""):'';
+    return ans ? s.substring(ans.left,ans.right):'';
 };
